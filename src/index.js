@@ -8,8 +8,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 import App from './App';
 
-const HAND_TYPE = ["rock", "scissors", "paper"];
-const JUDGE = ["Draw", "Win", "Lose"];
+const HAND_TYPE = Array.of("rock", "scissors", "paper");
+const JUDGE = Array.of("Draw", "Win", "Lose");
 
 let state_value = {
     src: HAND_TYPE[0],
@@ -21,7 +21,7 @@ function hand(state = state_value, action) {
     let opsrc = HAND_TYPE[Math.floor(Math.random() * 3)];
     let result = judge(action.type, opsrc);
 
-    if (action.type !== HAND_TYPE[0] && action.type !== HAND_TYPE[1] && action.type !== HAND_TYPE[2]) return state;
+    if (HAND_TYPE.indexOf(action.type) === -1) return state;
 
     return {
         src: action.type,
@@ -31,9 +31,7 @@ function hand(state = state_value, action) {
 }
 
 function judge(myHand, opponentHand) {
-    if (myHand === opponentHand) {
-        return JUDGE[0];
-    }
+    if (myHand === opponentHand) return JUDGE[0];
     if ((myHand === HAND_TYPE[0] && opponentHand === HAND_TYPE[1]) ||
         (myHand === HAND_TYPE[1] && opponentHand === HAND_TYPE[2]) ||
         (myHand === HAND_TYPE[2] && opponentHand === HAND_TYPE[0])) {
