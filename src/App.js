@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
-let title = "じゃんけん";
+const title = "じゃんけん";
 
 function mappingState(state) {
   return state;
